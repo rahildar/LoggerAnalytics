@@ -22,7 +22,7 @@ module.exports = morgan(jsonFormat,{stream: accessLogStream});
 
 function jsonFormat(tokens, req, res ,next) {
     // console.log(req);
-    return JSON.stringify({
+    return JSONObject({
         'remote-address': tokens['remote-addr'](req, res),
         'time': tokens['date'](req, res, 'iso'),
         'method': tokens['method'](req, res),
@@ -37,6 +37,6 @@ function jsonFormat(tokens, req, res ,next) {
         'hostname': tokens['hostname'](req, res),
         'instance': tokens['instance-id'](req, res),
         'pid': tokens['pid'](req, res)
-    },' ',2);
+    });
     next();
 }
