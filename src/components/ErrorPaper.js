@@ -14,25 +14,42 @@ function getColor(errorCode){
   }
   return color;
 }
+var headerStyle={
+  height:5
+}
+function DisplayError(props) {
 
+    return (
+    <div>
+    {Object.keys(props.error).map((key)=> {
+      if(key=='content-length')
+      { return }
+      else{
+      return <h5 style={headerStyle} >{key} : {props.error[key]}  </h5>
+      }
+    })}
+  </div>
+  )
+
+}
 export default class ErrorPaper extends React.Component{
-  render(){
+   render(){
     const errorStyle ={
-     width: "20%",
+     width: "22%",
+
      display: 'inline-block',
-     margin:5,
+     'margin-left':10,
+     'margin-right':10,
+     'margin-top':5,
+     'margin-bottom':5,
      paddingLeft:5,
-     'background-color': getColor(this.props.error.errorCode)
+
+     'background-color': getColor(this.props.error["status-code"])
     }
+
     return(
       <Paper zDepth={3} style={errorStyle} >
-        <h5>Error Code: {this.props.error.errorCode} </h5>
-        <h6>Time : {this.props.error.timestamp}</h6>
-        <h6>Method : {this.props.error.method}</h6>
-        <h6>Http Version : {this.props.error.httpVersion}</h6>
-        <h6>Url : {this.props.error.url}</h6>
-        <h6>User Agent : {this.props.error.userAgent}</h6>
-        <h6>Hostname : {this.props.error.hostname}</h6>
+      <DisplayError error = { this.props.error } />
        </Paper>
     );
   }

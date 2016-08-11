@@ -1,49 +1,40 @@
 import React,{Component} from 'react';
+import ErrorPaper from './ErrorPaper.js'
+import $ from 'jquery'
+import axios from 'axios'
 
-var dummyData =[
-  {
-    errorCode:'404',
-    timestamp:'2016-08-10T05:08:38.128Z',
-    method: 'GET',
-    httpVersion: '1.1',
-    url:'/',
-    userAgent:'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
-    hostname:'DELL'
-  },
-  {
-    errorCode:'200',
-    timestamp:'2016-08-10T05:08:38.128Z',
-    method: 'GET',
-    httpVersion: '1.1',
-    url:'/',
-    userAgent:'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
-    hostname:'HP'
+  var errorArray = [];
+ var keyNumber=0;
+var myData;
 
-  },
-  {
-    errorCode:'301',
-    timestamp:'2016-08-10T05:08:38.128Z',
-    method: 'GET',
-    httpVersion: '1.1',
-    url:'/',
-    userAgent:'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
-    hostname:'HP'
+ export default class ErrorContainer extends React.Component{
+   constructor(props){
+     super();
+     this.state ={
+       errorData:[]
+     }
+   }
+   componentWillMount(){
 
-  }
-];
+    var _this = this;
+    this.serverRequest =
+      axios
+        .get(this.props.source)
+        .then(function(result) {
+          myData = result.data
+              errorArray = myData.map(function(error){ 
+               return(<ErrorPaper key={keyNumber++}  error={error}/>)
+             })
+             _this.setState({errorData:errorArray})
+          });
 
-import React, { PropTypes } from 'react'
-
-const ErrorContainer  = React.createClass({
-  constructor(props){
-    super(props);
-    this.state.errors  = dummyData;
-  }
-  render () {
-    return (
-      {this.state.errors}
-    )
-  }
-})
-
-export default ErrorContainer
+   }
+   componentDidMount(){
+     console.log(myData);
+   }
+     render(){
+      return(
+        <div>{this.state.errorData}</div>
+      )
+    }
+   }
