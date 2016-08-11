@@ -15,7 +15,7 @@ function getColor(errorCode){
   return color;
 }
 var headerStyle={
-  height:5
+  paddingTop:5
 }
 function DisplayError(props) {
 
