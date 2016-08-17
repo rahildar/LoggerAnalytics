@@ -23,7 +23,7 @@ import { BarChart } from 'react-d3';
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
           <TitleBar title="Logger Analytics Dashboard" />
-            
+
           <ErrorContainer source='http://localhost:7770/logs'/>
         </div>
       </MuiThemeProvider>
