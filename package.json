@@ -40,6 +40,7 @@
     "react": "^15.3.0",
     "react-d3-basic": "^1.6.11",
     "react-dom": "^15.3.0",
+    "react-easy-chart": "^0.1.4",
     "react-tap-event-plugin": "^1.0.0"
   }
 }

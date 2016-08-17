@@ -5,7 +5,7 @@ import TitleBar from './components/TitleBar.js';
 import ErrorContainer  from './components/ErrorContainer.js';
 
 // import PieChart from './components/PieChart.js'
-import { BarChart } from 'react-d3';
+// import { BarChart } from 'react-d3';
 // var BarChart = rd3.BarChart;
 
 
@@ -13,11 +13,6 @@ import { BarChart } from 'react-d3';
  export default class App extends React.Component{
 
   render(){
-    var barData = [
-      {label: 'A', value: 5},
-      {label: 'B', value: 6},
-      {label: 'F', value: 7}
-    ];
     return(
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
