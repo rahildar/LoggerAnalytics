@@ -1,6 +1,7 @@
 var express = require('express');
 var logger = require('morgan');
 const fs = require('fs');
+const morgan = require('morgan');
 var customMiddleware = require('./customMiddleware.js');
 // console.log(customMiddleware);
 var app = express();
@@ -12,8 +13,11 @@ var port = 7770;
     return next();
   });
 
-//  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+//raw log file => rawfile.log
+var accessLogStream = fs.createWriteStream(__dirname + '/rawfile.log', {flags: 'a'})
+app.use(morgan('combined', {stream: accessLogStream}));
 
+//generate json file from logs
 app.use(customMiddleware);
 
 // Respond to GET request on the root route (/), the application’s home page
@@ -37,7 +41,7 @@ app.get('/logs',function(req,res){
     console.log(arr);
     res.send(arr);
   })
- 
+
 });
 
 // Wait and listen to incoming web requests on http://localhost:3000
